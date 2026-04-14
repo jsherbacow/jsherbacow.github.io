@@ -18,7 +18,6 @@
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -73,10 +72,11 @@
     /* ── HERO ── */
     #hero {
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 0 10%;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 4rem;
+      padding: 80px 10% 0;
       position: relative;
       overflow: hidden;
     }
@@ -91,6 +91,8 @@
       background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
       pointer-events: none;
     }
+
+    .hero-content { z-index: 1; }
 
     .hero-eyebrow {
       font-family: 'Courier New', monospace;
@@ -131,6 +133,41 @@
       flex-wrap: wrap;
     }
 
+    .hero-photo-wrap {
+      z-index: 1;
+      flex-shrink: 0;
+    }
+
+    .hero-photo {
+      width: 280px;
+      height: 340px;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 4px;
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 40px rgba(201,168,76,0.15), 8px 8px 0 rgba(201,168,76,0.2);
+      display: block;
+    }
+
+    .hero-photo-placeholder {
+      width: 280px;
+      height: 340px;
+      border-radius: 4px;
+      border: 2px dashed var(--accent);
+      background: var(--card-bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    /* ── BUTTONS ── */
     .btn {
       display: inline-block;
       padding: 0.75rem 2rem;
@@ -162,14 +199,10 @@
       border: 2px solid var(--accent);
     }
 
-    .btn-outline:hover {
-      background: rgba(201,168,76,0.1);
-    }
+    .btn-outline:hover { background: rgba(201,168,76,0.1); }
 
     /* ── SECTIONS ── */
-    section {
-      padding: 100px 10%;
-    }
+    section { padding: 100px 10%; }
 
     .section-label {
       font-family: 'Courier New', monospace;
@@ -195,9 +228,7 @@
     }
 
     /* ── ABOUT ── */
-    #about {
-      background: var(--navy-mid);
-    }
+    #about { background: var(--navy-mid); }
 
     .about-grid {
       display: grid;
@@ -213,9 +244,7 @@
       line-height: 1.85;
     }
 
-    .about-text p strong {
-      color: var(--text);
-    }
+    .about-text p strong { color: var(--text); }
 
     .about-stats {
       display: grid;
@@ -266,17 +295,15 @@
     }
 
     /* ── EDUCATION ── */
-    #education {
-      background: var(--navy);
-    }
+    #education { background: var(--navy); }
 
     .edu-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-left: 4px solid var(--accent);
-      padding: 2rem 2.5rem;
       margin-bottom: 1.5rem;
       border-radius: 2px;
+      overflow: hidden;
       transition: transform 0.2s, box-shadow 0.2s;
     }
 
@@ -284,6 +311,17 @@
       transform: translateX(4px);
       box-shadow: -4px 0 20px rgba(201,168,76,0.15);
     }
+
+    .edu-card-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .edu-card-body { padding: 2rem 2.5rem; }
 
     .edu-header {
       display: flex;
@@ -314,12 +352,7 @@
       font-size: 0.95rem;
     }
 
-    .edu-details {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
+    .edu-details { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
 
     .edu-details li {
       color: var(--text-muted);
@@ -338,9 +371,7 @@
     }
 
     /* ── EXPERIENCE ── */
-    #experience {
-      background: var(--navy-mid);
-    }
+    #experience { background: var(--navy-mid); }
 
     .timeline {
       position: relative;
@@ -377,14 +408,23 @@
     .timeline-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      padding: 1.8rem 2rem;
       border-radius: 2px;
+      overflow: hidden;
       transition: border-color 0.2s;
     }
 
-    .timeline-card:hover {
-      border-color: var(--accent);
+    .timeline-card:hover { border-color: var(--accent); }
+
+    .timeline-card-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      border-bottom: 1px solid var(--border);
     }
+
+    .timeline-card-body { padding: 1.8rem 2rem; }
 
     .tl-header {
       display: flex;
@@ -395,11 +435,7 @@
       gap: 0.4rem;
     }
 
-    .tl-company {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--white);
-    }
+    .tl-company { font-size: 1.1rem; font-weight: 700; color: var(--white); }
 
     .tl-date {
       font-family: 'Courier New', monospace;
@@ -408,12 +444,7 @@
       white-space: nowrap;
     }
 
-    .tl-role {
-      font-style: italic;
-      color: var(--accent);
-      font-size: 0.9rem;
-      margin-bottom: 0.25rem;
-    }
+    .tl-role { font-style: italic; color: var(--accent); font-size: 0.9rem; margin-bottom: 0.25rem; }
 
     .tl-location {
       font-family: 'Courier New', monospace;
@@ -422,12 +453,7 @@
       margin-bottom: 0.9rem;
     }
 
-    .tl-bullets {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.45rem;
-    }
+    .tl-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
 
     .tl-bullets li {
       color: var(--text-muted);
@@ -459,11 +485,7 @@
       margin-top: 0.5rem;
     }
 
-    /* ── LEADERSHIP SECTION ── */
-    #leadership {
-      background: var(--navy);
-    }
-
+    /* ── LEADERSHIP ── */
     .leadership-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -478,24 +500,10 @@
       transition: border-color 0.2s, transform 0.2s;
     }
 
-    .lead-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-3px);
-    }
+    .lead-card:hover { border-color: var(--accent); transform: translateY(-3px); }
 
-    .lead-org {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 0.2rem;
-    }
-
-    .lead-role {
-      font-style: italic;
-      color: var(--accent);
-      font-size: 0.85rem;
-      margin-bottom: 0.15rem;
-    }
+    .lead-org { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.2rem; }
+    .lead-role { font-style: italic; color: var(--accent); font-size: 0.85rem; margin-bottom: 0.15rem; }
 
     .lead-date {
       font-family: 'Courier New', monospace;
@@ -504,12 +512,7 @@
       margin-bottom: 0.9rem;
     }
 
-    .lead-bullets {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
+    .lead-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
 
     .lead-bullets li {
       color: var(--text-muted);
@@ -529,9 +532,7 @@
     }
 
     /* ── INTERESTS ── */
-    #interests {
-      background: var(--navy-mid);
-    }
+    #interests { background: var(--navy-mid); }
 
     .interests-intro {
       color: var(--text-muted);
@@ -556,22 +557,9 @@
       transition: border-color 0.2s, transform 0.2s;
     }
 
-    .interest-item:hover {
-      border-color: var(--accent);
-      transform: translateY(-3px);
-    }
-
-    .interest-icon {
-      font-size: 1.8rem;
-      margin-bottom: 0.7rem;
-      display: block;
-    }
-
-    .interest-name {
-      font-size: 0.9rem;
-      color: var(--text);
-      font-weight: 600;
-    }
+    .interest-item:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .interest-icon { font-size: 1.8rem; margin-bottom: 0.7rem; display: block; }
+    .interest-name { font-size: 0.9rem; color: var(--text); font-weight: 600; }
 
     .interest-sub {
       font-family: 'Courier New', monospace;
@@ -581,41 +569,19 @@
     }
 
     /* ── CONTACT ── */
-    #contact {
-      background: var(--navy);
-      text-align: center;
-    }
+    #contact { background: var(--navy); text-align: center; }
 
-    .contact-inner {
-      max-width: 600px;
-      margin: 0 auto;
-    }
+    .contact-inner { max-width: 600px; margin: 0 auto; }
 
     .contact-inner .section-label,
     .contact-inner .section-title,
-    .contact-inner .section-divider {
-      margin-left: auto;
-      margin-right: auto;
-    }
+    .contact-inner .section-divider { margin-left: auto; margin-right: auto; }
 
-    .contact-inner .section-divider {
-      margin: 0 auto 3rem;
-    }
+    .contact-inner .section-divider { margin: 0 auto 3rem; }
 
-    .contact-desc {
-      color: var(--text-muted);
-      font-size: 1.05rem;
-      margin-bottom: 2.5rem;
-      line-height: 1.8;
-    }
+    .contact-desc { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 2.5rem; line-height: 1.8; }
 
-    .contact-links {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      align-items: center;
-      margin-bottom: 3rem;
-    }
+    .contact-links { display: flex; flex-direction: column; gap: 1rem; align-items: center; margin-bottom: 3rem; }
 
     .contact-link {
       display: flex;
@@ -626,24 +592,15 @@
       font-size: 1rem;
       transition: color 0.2s;
       padding: 0.6rem 1.2rem;
-      border: 1px solid transparent;
       border-radius: 2px;
       width: 100%;
       max-width: 360px;
       background: var(--card-bg);
-      border-color: var(--border);
+      border: 1px solid var(--border);
     }
 
-    .contact-link:hover {
-      color: var(--accent);
-      border-color: var(--accent);
-    }
-
-    .contact-link-icon {
-      font-size: 1.1rem;
-      width: 24px;
-      text-align: center;
-    }
+    .contact-link:hover { color: var(--accent); border-color: var(--accent); }
+    .contact-link-icon { font-size: 1.1rem; width: 24px; text-align: center; }
 
     .contact-link-label {
       font-family: 'Courier New', monospace;
@@ -654,9 +611,7 @@
       margin-right: auto;
     }
 
-    .contact-link-value {
-      font-size: 0.9rem;
-    }
+    .contact-link-value { font-size: 0.9rem; }
 
     /* ── FOOTER ── */
     footer {
@@ -670,12 +625,16 @@
     }
 
     /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      #hero { grid-template-columns: 1fr; padding-top: 100px; }
+      .hero-photo-wrap { display: none; }
+    }
+
     @media (max-width: 768px) {
       nav { padding: 0 4%; }
       .nav-links { gap: 1.2rem; }
       .nav-links a { font-size: 0.72rem; }
       section { padding: 80px 6%; }
-      #hero { padding: 0 6%; }
       .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .about-stats { grid-template-columns: 1fr 1fr; }
       .tl-header, .edu-header { flex-direction: column; }
@@ -703,16 +662,26 @@
 
   <!-- HERO -->
   <section id="hero">
-    <p class="hero-eyebrow">Welcome</p>
-    <h1 class="hero-name">Jack<br>Sherbacow</h1>
-    <p class="hero-title">Investment Banking Analyst &amp; Finance Student</p>
-    <p class="hero-tagline">
-      Tulane University finance student and incoming Investment Banking Summer Analyst at
-      Macquarie Group, with experience spanning private equity, investment banking, and search funds.
-    </p>
-    <div class="hero-cta">
-      <a href="#experience" class="btn btn-primary">View Experience</a>
-      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Welcome</p>
+      <h1 class="hero-name">Jack<br>Sherbacow</h1>
+      <p class="hero-title">Investment Banking Analyst &amp; Finance Student</p>
+      <p class="hero-tagline">
+        Tulane University finance student and incoming Investment Banking Summer Analyst at
+        Macquarie Group, with experience spanning private equity, investment banking, and search funds.
+      </p>
+      <div class="hero-cta">
+        <a href="#experience" class="btn btn-primary">View Experience</a>
+        <a href="#contact" class="btn btn-outline">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-photo-wrap">
+      <img src="profile.jpg" alt="Jack Sherbacow" class="hero-photo"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+      <div class="hero-photo-placeholder" style="display:none;">
+        <span style="font-size:2rem;">👤</span>
+        <span>Save your LinkedIn photo<br>as <strong>profile.jpg</strong><br>in this folder</span>
+      </div>
     </div>
   </section>
 
@@ -725,7 +694,7 @@
       <div class="about-text">
         <p>
           I'm a <strong>Finance major at Tulane University's A.B. Freeman School of Business</strong>,
-          graduating May 2027, with a minor in Entrepreneurial Business and a 3.66 GPA.
+          graduating May 2027, with a minor in Entrepreneurial Business and a 3.7 GPA.
           Based in Bethesda, MD, I'm passionate about deal-making, capital markets, and the
           intersection of technology and finance.
         </p>
@@ -748,7 +717,7 @@
       </div>
       <div class="about-stats">
         <div class="stat-card">
-          <div class="stat-number">3.66</div>
+          <div class="stat-number">3.7</div>
           <div class="stat-label">Cumulative GPA</div>
         </div>
         <div class="stat-card">
@@ -774,30 +743,39 @@
     <div class="section-divider"></div>
 
     <div class="edu-card">
-      <div class="edu-header">
-        <span class="edu-school">Tulane University — A.B. Freeman School of Business</span>
-        <span class="edu-date">Expected May 2027</span>
+      <img
+        src="https://freeman.tulane.edu/sites/default/files/styles/content_max/public/tu-freeman-d9/gwbc-700.jpg"
+        alt="Tulane Freeman School of Business — Goldring/Woldenberg Business Complex"
+        class="edu-card-img"
+      />
+      <div class="edu-card-body">
+        <div class="edu-header">
+          <span class="edu-school">Tulane University — A.B. Freeman School of Business</span>
+          <span class="edu-date">Expected May 2027</span>
+        </div>
+        <p class="edu-degree">Bachelor of Science in Management · Major in Finance · Minor in Entrepreneurial Business</p>
+        <ul class="edu-details">
+          <li>Cumulative GPA: 3.7 / 4.00</li>
+          <li>Coursework: Advanced Financial Management, Business Analytics, Cases in Entrepreneurship, Fixed Income, Legal Studies</li>
+          <li>FGI Financial Literacy Tutor — teaching financial literacy to fellow students</li>
+          <li>Phi Chi Theta Business Fraternity · Tulane Club Baseball · Hillel · Tulane Poker Club</li>
+        </ul>
       </div>
-      <p class="edu-degree">Bachelor of Science in Management · Major in Finance · Minor in Entrepreneurial Business</p>
-      <ul class="edu-details">
-        <li>Cumulative GPA: 3.66 / 4.00</li>
-        <li>Coursework: Advanced Financial Management, Business Analytics, Cases in Entrepreneurship, Fixed Income, Legal Studies</li>
-        <li>FGI Financial Literacy Tutor — teaching financial literacy to fellow students</li>
-        <li>Phi Chi Theta Business Fraternity · Tulane Club Baseball · Hillel · Tulane Poker Club</li>
-      </ul>
     </div>
 
     <div class="edu-card">
-      <div class="edu-header">
-        <span class="edu-school">The Bullis School</span>
-        <span class="edu-date">June 2023</span>
+      <div class="edu-card-body">
+        <div class="edu-header">
+          <span class="edu-school">The Bullis School</span>
+          <span class="edu-date">June 2023</span>
+        </div>
+        <p class="edu-degree">High School Diploma · Potomac, MD</p>
+        <ul class="edu-details">
+          <li>Varsity Baseball — Team Captain</li>
+          <li>Sports Analytics Club — President</li>
+          <li>Bullis Shark Tank Competition · Families 4 Families</li>
+        </ul>
       </div>
-      <p class="edu-degree">High School Diploma · Potomac, MD</p>
-      <ul class="edu-details">
-        <li>Varsity Baseball — Team Captain</li>
-        <li>Sports Analytics Club — President</li>
-        <li>Bullis Shark Tank Competition · Families 4 Families</li>
-      </ul>
     </div>
   </section>
 
@@ -811,66 +789,79 @@
 
       <div class="timeline-item">
         <div class="timeline-card">
-          <div class="tl-header">
-            <span class="tl-company">Macquarie Group</span>
-            <span class="tl-date">Incoming June 2026</span>
+          <img
+            src="https://www.macquarie.com/us/en/insights/establishing-a-new-americas-headquarters-on-fifth-avenue/_jcr_content/root/colour_block_454384235/grid/slideshow/item_1727657623279/image.coreimg.jpeg/1771387794206/660-nyc-slide-1.jpeg"
+            alt="Macquarie Group — 660 Fifth Avenue, New York"
+            class="timeline-card-img"
+          />
+          <div class="timeline-card-body">
+            <div class="tl-header">
+              <span class="tl-company">Macquarie Group</span>
+              <span class="tl-date">Incoming June 2026</span>
+            </div>
+            <p class="tl-role">Investment Banking Summer Analyst</p>
+            <p class="tl-location">660 Fifth Avenue, New York, NY</p>
+            <span class="tl-incoming">Incoming</span>
           </div>
-          <p class="tl-role">Investment Banking Summer Analyst</p>
-          <p class="tl-location">New York, NY</p>
-          <span class="tl-incoming">Incoming</span>
         </div>
       </div>
 
       <div class="timeline-item">
         <div class="timeline-card">
-          <div class="tl-header">
-            <span class="tl-company">Dioun Health</span>
-            <span class="tl-date">May 2025 – August 2025</span>
+          <div class="timeline-card-body">
+            <div class="tl-header">
+              <span class="tl-company">Dioun Health</span>
+              <span class="tl-date">May 2025 – August 2025</span>
+            </div>
+            <p class="tl-role">Private Equity Summer Analyst</p>
+            <p class="tl-location">Boston, MA</p>
+            <ul class="tl-bullets">
+              <li>Supported diligence on a $20M home health acquisition, coordinating with internal teams and brokers to facilitate execution</li>
+              <li>Identified home health acquisition opportunities by researching targets and contacting owners and business brokers</li>
+            </ul>
           </div>
-          <p class="tl-role">Private Equity Summer Analyst</p>
-          <p class="tl-location">Boston, MA</p>
-          <ul class="tl-bullets">
-            <li>Supported diligence on a $20M home health acquisition, coordinating with internal teams and brokers to facilitate execution</li>
-            <li>Identified home health acquisition opportunities by researching targets and contacting owners and business brokers</li>
-          </ul>
         </div>
       </div>
 
       <div class="timeline-item">
         <div class="timeline-card">
-          <div class="tl-header">
-            <span class="tl-company">Concordia Capital</span>
-            <span class="tl-date">August 2024 – December 2024</span>
+          <div class="timeline-card-body">
+            <div class="tl-header">
+              <span class="tl-company">Concordia Capital</span>
+              <span class="tl-date">August 2024 – December 2024</span>
+            </div>
+            <p class="tl-role">Investment Banking Fall Analyst</p>
+            <p class="tl-location">New York, NY</p>
+            <ul class="tl-bullets">
+              <li>Built 4 Confidential Information Memorandums and 3 Deal Teasers for software and digital services clients</li>
+              <li>Analyzed 5 acquisition targets for a client's inorganic growth plans in the North American contact center solutions market</li>
+              <li>Developed strong soft skills through managing tight project deadlines and effectively communicating with senior leadership</li>
+            </ul>
           </div>
-          <p class="tl-role">Investment Banking Fall Analyst</p>
-          <p class="tl-location">New York, NY</p>
-          <ul class="tl-bullets">
-            <li>Built 4 Confidential Information Memorandums and 3 Deal Teasers for software and digital services clients</li>
-            <li>Analyzed 5 acquisition targets for a client's inorganic growth plans in the North American contact center solutions market</li>
-            <li>Developed strong soft skills through managing tight project deadlines and effectively communicating with senior leadership</li>
-          </ul>
         </div>
       </div>
 
       <div class="timeline-item">
         <div class="timeline-card">
-          <div class="tl-header">
-            <span class="tl-company">Cork Partners</span>
-            <span class="tl-date">May 2024 – September 2024</span>
+          <div class="timeline-card-body">
+            <div class="tl-header">
+              <span class="tl-company">Cork Partners</span>
+              <span class="tl-date">May 2024 – September 2024</span>
+            </div>
+            <p class="tl-role">Search Fund Summer Analyst</p>
+            <p class="tl-location">Hanover, NH</p>
+            <ul class="tl-bullets">
+              <li>Evaluated potential acquisitions of SaaS businesses with $5–10M of EBITDA within mission-critical industries</li>
+              <li>Performed financial and customer due diligence for the acquisition of an asset-tracking software company</li>
+              <li>Implemented a new sourcing strategy that led to increased meetings with business owners, improving deal pipeline efficiency</li>
+            </ul>
           </div>
-          <p class="tl-role">Search Fund Summer Analyst</p>
-          <p class="tl-location">Hanover, NH</p>
-          <ul class="tl-bullets">
-            <li>Evaluated potential acquisitions of SaaS businesses with $5–10M of EBITDA within mission-critical industries</li>
-            <li>Performed financial and customer due diligence for the acquisition of an asset-tracking software company</li>
-            <li>Implemented a new sourcing strategy that led to increased meetings with business owners, improving deal pipeline efficiency</li>
-          </ul>
         </div>
       </div>
 
     </div>
 
-    <!-- Leadership sub-section -->
+    <!-- Leadership -->
     <div style="margin-top: 4rem;">
       <p class="section-label" style="margin-bottom:0.5rem;">Campus Leadership &amp; Development</p>
       <div class="section-divider" style="margin-bottom: 2rem;"></div>
@@ -950,17 +941,17 @@
       <div class="interest-item">
         <span class="interest-icon">⚖️</span>
         <p class="interest-name">Bankruptcy Law</p>
-        <p class="interest-sub">Restructuring & distressed situations</p>
+        <p class="interest-sub">Restructuring &amp; distressed situations</p>
       </div>
       <div class="interest-item">
         <span class="interest-icon">🛡️</span>
         <p class="interest-name">Defense Technology</p>
-        <p class="interest-sub">Aerospace, defense & national security</p>
+        <p class="interest-sub">Aerospace, defense &amp; national security</p>
       </div>
       <div class="interest-item">
         <span class="interest-icon">🏛️</span>
         <p class="interest-name">Roman Churches</p>
-        <p class="interest-sub">Architecture, history & culture</p>
+        <p class="interest-sub">Architecture, history &amp; culture</p>
       </div>
     </div>
   </section>
