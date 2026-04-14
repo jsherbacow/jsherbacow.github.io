@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jack Sherbacow</title>
+  <style>
+    :root {
+      --navy: #0a1628;
+      --navy-mid: #112240;
+      --accent: #c9a84c;
+      --accent-light: #e8c97a;
+      --text: #ccd6f6;
+      --text-muted: #8892b0;
+      --white: #e6f1ff;
+      --card-bg: #172a45;
+      --border: #1e3a5f;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background-color: var(--navy);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(10, 22, 40, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 5%;
+      height: 64px;
+    }
+
+    .nav-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-family: 'Courier New', monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 10%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-name {
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.05;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-title {
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      color: var(--accent);
+      font-weight: 400;
+      margin-bottom: 1.6rem;
+      font-style: italic;
+    }
+
+    .hero-tagline {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 540px;
+      margin-bottom: 2.8rem;
+      line-height: 1.8;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--navy);
+      font-weight: 700;
+      border: 2px solid var(--accent);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-light);
+      border-color: var(--accent-light);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--accent);
+      border: 2px solid var(--accent);
+    }
+
+    .btn-outline:hover {
+      background: rgba(201,168,76,0.1);
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 100px 10%;
+    }
+
+    .section-label {
+      font-family: 'Courier New', monospace;
+      font-size: 0.78rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    .section-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--accent);
+      margin-bottom: 3rem;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--navy-mid);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 1.2rem;
+      line-height: 1.85;
+    }
+
+    .about-text p strong {
+      color: var(--text);
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .stat-card {
+      background: var(--navy);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--accent);
+      padding: 1.5rem;
+      border-radius: 2px;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .stat-label {
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .cert-list {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .cert-badge {
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--accent);
+      font-family: 'Courier New', monospace;
+      font-size: 0.72rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 2px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── EDUCATION ── */
+    #education {
+      background: var(--navy);
+    }
+
+    .edu-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      padding: 2rem 2.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 2px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .edu-card:hover {
+      transform: translateX(4px);
+      box-shadow: -4px 0 20px rgba(201,168,76,0.15);
+    }
+
+    .edu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.4rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .edu-school {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .edu-date {
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .edu-degree {
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 0.9rem;
+      font-size: 0.95rem;
+    }
+
+    .edu-details {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .edu-details li {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .edu-details li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.7rem;
+      top: 0.25em;
+    }
+
+    /* ── EXPERIENCE ── */
+    #experience {
+      background: var(--navy-mid);
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 2.5rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.5rem;
+      top: 8px;
+      width: 10px;
+      height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.2);
+    }
+
+    .timeline-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 1.8rem 2rem;
+      border-radius: 2px;
+      transition: border-color 0.2s;
+    }
+
+    .timeline-card:hover {
+      border-color: var(--accent);
+    }
+
+    .tl-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.2rem;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tl-company {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .tl-date {
+      font-family: 'Courier New', monospace;
+      font-size: 0.78rem;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .tl-role {
+      font-style: italic;
+      color: var(--accent);
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .tl-location {
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .tl-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .tl-bullets li {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      padding-left: 1.2rem;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .tl-bullets li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.7rem;
+      top: 0.25em;
+    }
+
+    .tl-incoming {
+      display: inline-block;
+      background: rgba(201,168,76,0.15);
+      border: 1px solid rgba(201,168,76,0.4);
+      color: var(--accent);
+      font-family: 'Courier New', monospace;
+      font-size: 0.72rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 2px;
+      letter-spacing: 0.05em;
+      margin-top: 0.5rem;
+    }
+
+    /* ── LEADERSHIP SECTION ── */
+    #leadership {
+      background: var(--navy);
+    }
+
+    .leadership-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .lead-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 1.8rem;
+      border-radius: 2px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .lead-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .lead-org {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.2rem;
+    }
+
+    .lead-role {
+      font-style: italic;
+      color: var(--accent);
+      font-size: 0.85rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .lead-date {
+      font-family: 'Courier New', monospace;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .lead-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .lead-bullets li {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      padding-left: 1rem;
+      position: relative;
+      line-height: 1.55;
+    }
+
+    .lead-bullets li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.65rem;
+      top: 0.25em;
+    }
+
+    /* ── INTERESTS ── */
+    #interests {
+      background: var(--navy-mid);
+    }
+
+    .interests-intro {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+
+    .interests-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .interest-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 1.5rem 1.2rem;
+      border-radius: 2px;
+      text-align: center;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .interest-item:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .interest-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.7rem;
+      display: block;
+    }
+
+    .interest-name {
+      font-size: 0.9rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .interest-sub {
+      font-family: 'Courier New', monospace;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--navy);
+      text-align: center;
+    }
+
+    .contact-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-inner .section-label,
+    .contact-inner .section-title,
+    .contact-inner .section-divider {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .contact-inner .section-divider {
+      margin: 0 auto 3rem;
+    }
+
+    .contact-desc {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 3rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 1rem;
+      transition: color 0.2s;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid transparent;
+      border-radius: 2px;
+      width: 100%;
+      max-width: 360px;
+      background: var(--card-bg);
+      border-color: var(--border);
+    }
+
+    .contact-link:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .contact-link-icon {
+      font-size: 1.1rem;
+      width: 24px;
+      text-align: center;
+    }
+
+    .contact-link-label {
+      font-family: 'Courier New', monospace;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-right: auto;
+    }
+
+    .contact-link-value {
+      font-size: 0.9rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 4%; }
+      .nav-links { gap: 1.2rem; }
+      .nav-links a { font-size: 0.72rem; }
+      section { padding: 80px 6%; }
+      #hero { padding: 0 6%; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+      .tl-header, .edu-header { flex-direction: column; }
+    }
+
+    @media (max-width: 480px) {
+      .nav-links { display: none; }
+      .about-stats { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">JS</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#interests">Interests</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <p class="hero-eyebrow">Welcome</p>
+    <h1 class="hero-name">Jack<br>Sherbacow</h1>
+    <p class="hero-title">Investment Banking Analyst &amp; Finance Student</p>
+    <p class="hero-tagline">
+      Tulane University finance student and incoming Investment Banking Summer Analyst at
+      Macquarie Group, with experience spanning private equity, investment banking, and search funds.
+    </p>
+    <div class="hero-cta">
+      <a href="#experience" class="btn btn-primary">View Experience</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="section-label">01 — About</p>
+    <h2 class="section-title">Who I Am</h2>
+    <div class="section-divider"></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm a <strong>Finance major at Tulane University's A.B. Freeman School of Business</strong>,
+          graduating May 2027, with a minor in Entrepreneurial Business and a 3.66 GPA.
+          Based in Bethesda, MD, I'm passionate about deal-making, capital markets, and the
+          intersection of technology and finance.
+        </p>
+        <p>
+          My experience spans <strong>investment banking, private equity, and search fund</strong>
+          investing — from building CIMs and analyzing acquisition targets at Concordia Capital to
+          supporting a $20M home health acquisition at Dioun Health. This summer I'm joining
+          <strong>Macquarie Group</strong> in New York as an Investment Banking Summer Analyst.
+        </p>
+        <p>
+          Outside of finance, I'm a competitive baseball player, a lifelong Green Bay Packers fan,
+          and someone who finds as much joy in a round of golf as in a well-built LBO model.
+        </p>
+        <div class="cert-list">
+          <span class="cert-badge">FINRA SIE</span>
+          <span class="cert-badge">Bloomberg Market Concepts</span>
+          <span class="cert-badge">CAIA FAI</span>
+          <span class="cert-badge">MS Excel Associate</span>
+        </div>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-number">3.66</div>
+          <div class="stat-label">Cumulative GPA</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">4</div>
+          <div class="stat-label">Certifications</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">Top 12</div>
+          <div class="stat-label">NIBC Finalist</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">IB</div>
+          <div class="stat-label">Macquarie Group '26</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <p class="section-label">02 — Education</p>
+    <h2 class="section-title">Academic Background</h2>
+    <div class="section-divider"></div>
+
+    <div class="edu-card">
+      <div class="edu-header">
+        <span class="edu-school">Tulane University — A.B. Freeman School of Business</span>
+        <span class="edu-date">Expected May 2027</span>
+      </div>
+      <p class="edu-degree">Bachelor of Science in Management · Major in Finance · Minor in Entrepreneurial Business</p>
+      <ul class="edu-details">
+        <li>Cumulative GPA: 3.66 / 4.00</li>
+        <li>Coursework: Advanced Financial Management, Business Analytics, Cases in Entrepreneurship, Fixed Income, Legal Studies</li>
+        <li>FGI Financial Literacy Tutor — teaching financial literacy to fellow students</li>
+        <li>Phi Chi Theta Business Fraternity · Tulane Club Baseball · Hillel · Tulane Poker Club</li>
+      </ul>
+    </div>
+
+    <div class="edu-card">
+      <div class="edu-header">
+        <span class="edu-school">The Bullis School</span>
+        <span class="edu-date">June 2023</span>
+      </div>
+      <p class="edu-degree">High School Diploma · Potomac, MD</p>
+      <ul class="edu-details">
+        <li>Varsity Baseball — Team Captain</li>
+        <li>Sports Analytics Club — President</li>
+        <li>Bullis Shark Tank Competition · Families 4 Families</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <p class="section-label">03 — Experience</p>
+    <h2 class="section-title">Professional Background</h2>
+    <div class="section-divider"></div>
+
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <div class="tl-header">
+            <span class="tl-company">Macquarie Group</span>
+            <span class="tl-date">Incoming June 2026</span>
+          </div>
+          <p class="tl-role">Investment Banking Summer Analyst</p>
+          <p class="tl-location">New York, NY</p>
+          <span class="tl-incoming">Incoming</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <div class="tl-header">
+            <span class="tl-company">Dioun Health</span>
+            <span class="tl-date">May 2025 – August 2025</span>
+          </div>
+          <p class="tl-role">Private Equity Summer Analyst</p>
+          <p class="tl-location">Boston, MA</p>
+          <ul class="tl-bullets">
+            <li>Supported diligence on a $20M home health acquisition, coordinating with internal teams and brokers to facilitate execution</li>
+            <li>Identified home health acquisition opportunities by researching targets and contacting owners and business brokers</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <div class="tl-header">
+            <span class="tl-company">Concordia Capital</span>
+            <span class="tl-date">August 2024 – December 2024</span>
+          </div>
+          <p class="tl-role">Investment Banking Fall Analyst</p>
+          <p class="tl-location">New York, NY</p>
+          <ul class="tl-bullets">
+            <li>Built 4 Confidential Information Memorandums and 3 Deal Teasers for software and digital services clients</li>
+            <li>Analyzed 5 acquisition targets for a client's inorganic growth plans in the North American contact center solutions market</li>
+            <li>Developed strong soft skills through managing tight project deadlines and effectively communicating with senior leadership</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-card">
+          <div class="tl-header">
+            <span class="tl-company">Cork Partners</span>
+            <span class="tl-date">May 2024 – September 2024</span>
+          </div>
+          <p class="tl-role">Search Fund Summer Analyst</p>
+          <p class="tl-location">Hanover, NH</p>
+          <ul class="tl-bullets">
+            <li>Evaluated potential acquisitions of SaaS businesses with $5–10M of EBITDA within mission-critical industries</li>
+            <li>Performed financial and customer due diligence for the acquisition of an asset-tracking software company</li>
+            <li>Implemented a new sourcing strategy that led to increased meetings with business owners, improving deal pipeline efficiency</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Leadership sub-section -->
+    <div style="margin-top: 4rem;">
+      <p class="section-label" style="margin-bottom:0.5rem;">Campus Leadership &amp; Development</p>
+      <div class="section-divider" style="margin-bottom: 2rem;"></div>
+      <div class="leadership-grid">
+
+        <div class="lead-card">
+          <p class="lead-org">Green Bull Investment Banking Group</p>
+          <p class="lead-role">Member</p>
+          <p class="lead-date">Jan 2024 – Aug 2025 · New Orleans, LA</p>
+          <ul class="lead-bullets">
+            <li>Selected from 100+ applicants to join a cohort of 21 students</li>
+            <li>Developed technical understanding of DCF, LBO, and valuation methodologies</li>
+            <li>Advanced professional development through workshops, networking, and alumni mentorship</li>
+          </ul>
+        </div>
+
+        <div class="lead-card">
+          <p class="lead-org">National Investment Banking Competition</p>
+          <p class="lead-role">Finalist — Top 12</p>
+          <p class="lead-date">Dec 2024 – Jan 2025 · Vancouver, CA</p>
+          <ul class="lead-bullets">
+            <li>Collaborated with a team of four on a sell-side M&amp;A pitch on Bumble</li>
+            <li>Created valuation models and industry analyses</li>
+            <li>Presented to Senior Managing Directors at the finals in Vancouver</li>
+          </ul>
+        </div>
+
+        <div class="lead-card">
+          <p class="lead-org">Wall Street Bound</p>
+          <p class="lead-role">Program Fellow · Morgan Stanley Scholar</p>
+          <p class="lead-date">Jan 2024 – May 2024 · New York, NY</p>
+          <ul class="lead-bullets">
+            <li>Completed an intensive financial markets curriculum while preparing for the SIE exam</li>
+            <li>Selected as a Morgan Stanley Scholar — received mentorship from Morgan Stanley professionals</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERESTS -->
+  <section id="interests">
+    <p class="section-label">04 — Interests</p>
+    <h2 class="section-title">Beyond Finance</h2>
+    <div class="section-divider"></div>
+    <p class="interests-intro">
+      I believe the best professionals bring curiosity from all corners of life.
+      Here's a slice of what I care about outside of spreadsheets and pitch decks.
+    </p>
+    <div class="interests-grid">
+      <div class="interest-item">
+        <span class="interest-icon">⚾</span>
+        <p class="interest-name">Baseball</p>
+        <p class="interest-sub">Varsity captain → club ball at Tulane</p>
+      </div>
+      <div class="interest-item">
+        <span class="interest-icon">⛳</span>
+        <p class="interest-name">Golf</p>
+        <p class="interest-sub">On the course whenever possible</p>
+      </div>
+      <div class="interest-item">
+        <span class="interest-icon">🏈</span>
+        <p class="interest-name">Green Bay Packers</p>
+        <p class="interest-sub">Die-hard fan, through thick and thin</p>
+      </div>
+      <div class="interest-item">
+        <span class="interest-icon">📊</span>
+        <p class="interest-name">Moneyball</p>
+        <p class="interest-sub">Sports analytics meets capital allocation</p>
+      </div>
+      <div class="interest-item">
+        <span class="interest-icon">🐾</span>
+        <p class="interest-name">Cocker Spaniels</p>
+        <p class="interest-sub">Man's best friend</p>
+      </div>
+      <div class="interest-item">
+        <span class="interest-icon">⚖️</span>
+        <p class="interest-name">Bankruptcy Law</p>
+        <p class="interest-sub">Restructuring & distressed situations</p>
+      </div>
+      <div class="interest-item">
+        <span class="interest-icon">🛡️</span>
+        <p class="interest-name">Defense Technology</p>
+        <p class="interest-sub">Aerospace, defense & national security</p>
+      </div>
+      <div class="interest-item">
+        <span class="interest-icon">🏛️</span>
+        <p class="interest-name">Roman Churches</p>
+        <p class="interest-sub">Architecture, history & culture</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner">
+      <p class="section-label">05 — Contact</p>
+      <h2 class="section-title">Get In Touch</h2>
+      <div class="section-divider"></div>
+      <p class="contact-desc">
+        Whether you're interested in deal flow, want to connect on finance, or just want to
+        talk Packers — my inbox is always open.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:jsherbacow@tulane.edu" class="contact-link">
+          <span class="contact-link-icon">✉</span>
+          <span class="contact-link-label">Email</span>
+          <span class="contact-link-value">jsherbacow@tulane.edu</span>
+        </a>
+        <a href="https://www.linkedin.com/in/jack-sherbacow/" target="_blank" rel="noopener" class="contact-link">
+          <span class="contact-link-icon">in</span>
+          <span class="contact-link-label">LinkedIn</span>
+          <span class="contact-link-value">jack-sherbacow</span>
+        </a>
+        <a href="tel:2029095361" class="contact-link">
+          <span class="contact-link-icon">☎</span>
+          <span class="contact-link-label">Phone</span>
+          <span class="contact-link-value">(202) 909-5361</span>
+        </a>
+      </div>
+      <a href="mailto:jsherbacow@tulane.edu" class="btn btn-primary">Say Hello</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Jack Sherbacow · New Orleans, LA · Bethesda, MD</p>
+  </footer>
+
+</body>
+</html>
